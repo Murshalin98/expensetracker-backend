@@ -17,4 +17,24 @@ public class ExpenseServiceImpl implements ExpenseService {
     public List<Expense> findAll() {
         return expenseRepository.findAll();
     }
+
+    @Override
+    public Expense save(Expense expense) {
+        expenseRepository.save(expense);
+        return expense;
+    }
+
+    @Override
+    public Expense findById(Long id) {
+        if (expenseRepository.findById(id).isPresent()){
+            return expenseRepository.findById(id).get();
+        }
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+        Expense expense = findById(id);
+        expenseRepository.delete(expense);
+    }
 }
